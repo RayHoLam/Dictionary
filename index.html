@@ -7,12 +7,26 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            margin: 20px;
+            margin: 0;
+            height: 100vh; /* 使容器高度為視窗高度 */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f5f5f5; /* 背景顏色 */
+        }
+        .container {
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: 4px 4px 10px rgba(0, 0, 0, 1), 
+                        -4px -4px 10px rgba(255, 255, 255, 0.2);
+            background-color: white; /* 容器背景顏色 */
         }
         input[type="text"] {
             width: 300px;
             padding: 10px;
             margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
         }
         button {
             padding: 10px;
@@ -23,10 +37,12 @@
     </style>
 </head>
 <body>
-    <h1>靜態字典</h1>
-    <input type="text" id="search" placeholder="輸入單字...">
-    <button onclick="searchWord()">搜索</button>
-    <div id="result"></div>
+    <div class="container">
+        <h1>靜態字典</h1>
+        <input type="text" id="search" placeholder="輸入單字...">
+        <button onclick="searchWord()">搜索</button>
+        <div id="result"></div>
+    </div>
 
     <script>
         let dictionary = {};
@@ -38,18 +54,19 @@
                 data.split('\n').forEach(line => {
                     const parts = line.split('\t');
                     if (parts.length > 1) {
-                        const word = parts[0].trim().toLowerCase(); // 轉為小寫
-                        const definition = parts.slice(1).join('\t').trim(); // 取定義部分
-                        dictionary[word] = definition.replace(/<[^>]*>/g, '').replace(/\n/g, ' '); // 移除 HTML 標籤和換行符
+                        const word = parts[0].trim().toLowerCase();
+                        const definition = parts.slice(1).join('\t').trim();
+                        dictionary[word] = definition.replace(/\n/g, ' ');
                     }
                 });
             });
 
         // 搜索單字
         function searchWord() {
-            const word = document.getElementById('search').value.trim().toLowerCase(); // 轉為小寫
+            const word = document.getElementById('search').value.trim().toLowerCase();
             const resultDiv = document.getElementById('result');
             if (dictionary[word]) {
+                const definition = dictionary[word].replace(/\n/g, ' ');
                 resultDiv.innerHTML = `<strong>${word}:</strong> ${dictionary[word]}`;
             } else {
                 resultDiv.innerHTML = '未找到該單字。';
