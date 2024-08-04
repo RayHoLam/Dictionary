@@ -39,8 +39,8 @@
                     const parts = line.split('\t');
                     if (parts.length > 1) {
                         const word = parts[0].trim().toLowerCase(); // 轉為小寫
-                        const definition = parts[1].trim().replace(/<[^>]*>/g, '').replace(/\n<br>/g, ''); // 移除 HTML 標籤和換行
-                        dictionary[word] = definition;
+                        const definition = parts.slice(2).join('\t').trim(); // 取定義部分
+                        dictionary[word] = definition.replace(/<[^>]*>/g, ''); // 移除 HTML 標籤
                     }
                 });
             });
