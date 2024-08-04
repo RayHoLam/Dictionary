@@ -50,7 +50,8 @@
             const word = document.getElementById('search').value.trim().toLowerCase(); // 轉為小寫
             const resultDiv = document.getElementById('result');
             if (dictionary[word]) {
-                resultDiv.innerHTML = `<strong>${word}:</strong> ${dictionary[word]}`;
+                const definition = dictionary[word].replace(/\n/g, ' '); // 去掉換行符
+                resultDiv.innerHTML = `<strong>${word}:</strong> ${definition}`;
             } else {
                 resultDiv.innerHTML = '未找到該單字。';
             }
