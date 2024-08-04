@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>靜態字典網站</title>
+    <title>dictionary website</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -38,16 +38,15 @@
 </head>
 <body>
     <div class="container">
-        <h1>靜態字典</h1>
-        <input type="text" id="search" placeholder="輸入單字...">
-        <button onclick="searchWord()">搜索</button>
+        <h1>Basic Dictionary</h1>
+        <input type="text" id="search" placeholder="Enter a word...">
+        <button onclick="searchWord()">Search</button>
         <div id="result"></div>
     </div>
 
     <script>
         let dictionary = {};
 
-        // 加載字典數據
         fetch('dictionary.txt')
             .then(response => response.text())
             .then(data => {
@@ -55,24 +54,22 @@
                     const parts = line.split('\t');
                     if (parts.length > 1) {
                         const word = parts[0].trim().toLowerCase();
-                        const definition = parts.slice(1).join(' ').trim(); // 使用空格連接定義
-                        dictionary[word] = definition.replace(/<[^>]*>/g, ''); // 移除 HTML 標籤
+                        const definition = parts.slice(1).join(' ').trim();
+                        dictionary[word] = definition.replace(/<[^>]*>/g, '');
                     }
                 });
             });
 
-        // 搜索單字
         function searchWord() {
             const word = document.getElementById('search').value.trim().toLowerCase();
             const resultDiv = document.getElementById('result');
             if (dictionary[word]) {
                 resultDiv.innerHTML = `<strong>${word}:</strong> ${dictionary[word]}`;
             } else {
-                resultDiv.innerHTML = '未找到該單字。';
+                resultDiv.innerHTML = 'The word was not found.';
             }
         }
 
-        // 監聽鍵盤事件
         document.getElementById('search').addEventListener('keypress', function (event) {
             if (event.key === 'Enter') {
                 searchWord();
