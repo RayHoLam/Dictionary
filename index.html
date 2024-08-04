@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>靜態字典網站</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        input[type="text"] {
+            width: 300px;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+        button {
+            padding: 10px;
+        }
+        #result {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>靜態字典</h1>
+    <input type="text" id="search" placeholder="輸入單字...">
+    <button onclick="searchWord()">搜索</button>
+    <div id="result"></div>
+
+    <script>
+        let dictionary = {};
+
+        // 加載字典數據
+        fetch('dictionary.txt')
+            .then(response => response.text())
+            .then(data => {
+                data.split('\n').forEach(line => {
+                    const parts = line.split('\t');
+                    if (parts.length > 1) {
+                        const word = parts[0].trim().toLowerCase(); // 轉為小寫
+                        const definition = parts[1].trim().replace(/<[^>]*>/g, ''); // 移除 HTML 標籤
+                        dictionary[word] = definition;
+                    }
+                });
+            });
+
+        // 搜索單字
+        function searchWord() {
+            const word = document.getElementById('search').value.trim().toLowerCase(); // 轉為小寫
+            const resultDiv = document.getElementById('result');
+            if (dictionary[word]) {
+                resultDiv.innerHTML = `<strong>${word}:</strong> ${dictionary[word]}`;
+            } else {
+                resultDiv.innerHTML = '未找到該單字。';
+            }
+        }
+    </script>
+</body>
+</html>
