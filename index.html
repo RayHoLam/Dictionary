@@ -8,18 +8,18 @@
         body {
             font-family: Arial, sans-serif;
             margin: 0;
-            height: 100vh; /* 使容器高度為視窗高度 */
+            height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            background-color: #f5f5f5; /* 背景顏色 */
+            background-color: #f5f5f5;
         }
         .container {
             padding: 20px;
             border-radius: 20px;
             box-shadow: 4px 4px 10px rgba(0, 0, 0, 1), 
                         -4px -4px 10px rgba(255, 255, 255, 0.2);
-            background-color: white; /* 容器背景顏色 */
+            background-color: white;
         }
         input[type="text"] {
             width: 300px;
@@ -55,8 +55,8 @@
                     const parts = line.split('\t');
                     if (parts.length > 1) {
                         const word = parts[0].trim().toLowerCase();
-                        const definition = parts.slice(1).join('\t').trim();
-                        dictionary[word] = definition.replace(/\n/g, ' ');
+                        const definition = parts.slice(1).join(' ').trim(); // 使用空格連接定義
+                        dictionary[word] = definition.replace(/<[^>]*>/g, ''); // 移除 HTML 標籤
                     }
                 });
             });
@@ -66,7 +66,6 @@
             const word = document.getElementById('search').value.trim().toLowerCase();
             const resultDiv = document.getElementById('result');
             if (dictionary[word]) {
-                const definition = dictionary[word].replace(/\n/g, ' ');
                 resultDiv.innerHTML = `<strong>${word}:</strong> ${dictionary[word]}`;
             } else {
                 resultDiv.innerHTML = '未找到該單字。';
