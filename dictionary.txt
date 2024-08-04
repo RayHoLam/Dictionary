@@ -1,4 +1,4 @@
-﻿a	<p><b><font color=blue size=5>a</font></b>\n<br>[ei, ə, æn, ən]\n<br>art.一(個)；任何一(個)；每一(個)\n
+a	<p><b><font color=blue size=5>a</font></b>\n<br>[ei, ə, æn, ən]\n<br>art.一(個)；任何一(個)；每一(個)\n
 abacus	<p><b><font color=blue size=5>abacus</font></b>\n<br>[ˈæbəkəs]\n<br>n.算盤\n
 abandon	<p><b><font color=blue size=5>abandon</font></b>\n<br>[əˈbændən]\n<br>vt.離棄，丟棄；遺棄，拋棄；放棄\n
 abandoned	<p><b><font color=blue size=5>abandoned</font></b>\n<br>[əˈbændənd]\n<br>a.被拋棄的；無約束的\n
